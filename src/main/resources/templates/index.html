@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" >
+<head>
+<meta charset="UTF-8"> </meta>
+<title th:text="${mess}">mocking text</title>
+</head>
+<body>
+		<h2 th:text="${mess}"></h2>
+		
+		<table>
+   			<th:block th:each="topic : ${topics}">
+     			 <tr>
+         			<td th:text="${topic.firstName}">...</td>
+        			<td th:text="${topic.lastName}">...</td>
+     			 </tr>
+      			 <tr>
+         		
+      			</tr>
+   			</th:block>
+		</table>
+		
+</body>
+</html>
