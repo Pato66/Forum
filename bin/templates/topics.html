@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" >
+	<head>
+		<title>Reading List</title>
+		
+	</head>
+	<body>	
+
+		<h2>Your Reading List</h2>
+		<div th:unless="${#lists.isEmpty(topics)}">
+			<dl th:each="topic : ${topics}">
+				<dt class="bookHeadline">
+				User: <span th:text="${topic.User.userId}"></span>
+				Date: <span th:text="${topic.dateOfCreation}"></span>
+				Category: <span th:text="${topic.category}"></span>
+				</dt>
+				<dd class="bookDescription">
+					Description <span th:if="${topic.description}" th:text="${topic.description}" ></span>
+					No description available <span th:if="${topic.description eq null}"> </span>
+				</dd>
+				<h4>----------------------------------------------------------</h4>
+			</dl>
+		</div>
+		<div th:if="${#lists.isEmpty(books)}">
+			<p>Content is not available now.</p>
+		</div>
+		
+	</body>
+</html>

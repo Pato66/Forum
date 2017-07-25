@@ -32,6 +32,12 @@ public class TopicController {
 		return "addTopic";
 	}
 	
+	@RequestMapping(value="/topics", method=RequestMethod.GET)
+	public String showTopisc(Model model) {
+		model.addAttribute("topics", clientService.showTopic("all") );
+		return "topics";
+	}
+	
 	@RequestMapping(value="/addTopic", method=RequestMethod.POST)
 	public String addToReadingList( Topic newTopic) {
 		newTopic.setDateOfCreation(new Date());

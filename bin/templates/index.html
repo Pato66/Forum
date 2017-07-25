@@ -6,7 +6,8 @@
 </head>
 <body>
 		<h2 th:text="${mess}"></h2>
-		<a th:href="@{/addTopic}"> Add new topic </a>
+		<a th:href="@{/addTopic}"> Add new topic |</a>
+		<a th:href="@{/topics}">| Show topics </a>
 		
 		<table>
    			<th:block th:each="topic : ${topics}">
