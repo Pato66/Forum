@@ -12,11 +12,11 @@ import javax.validation.constraints.NotNull;
 public class Topic  implements java.io.Serializable {
 
 	 @Id 
-	 @GeneratedValue(strategy=GenerationType.AUTO)
+	 @GeneratedValue(strategy=GenerationType.IDENTITY)
      private long topicId;
 	 
-	 @NotNull
-     @ManyToOne(cascade = CascadeType.ALL )
+
+     @ManyToOne(cascade = CascadeType.MERGE )
      @JoinColumn(name = "user_id")
      private User user;
      private Date dateOfCreation;
@@ -26,7 +26,6 @@ public class Topic  implements java.io.Serializable {
     public Topic() {
     }
 
-	
     public Topic(long topicId, User user, Date dateOfCreation, String category, String description) {
         this.topicId = topicId;
         this.user = user;

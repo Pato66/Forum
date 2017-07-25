@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" >
+<head>
+<meta charset="UTF-8"> </meta>
+<title>Add topic</title>
+</head>
+<body>
+	
+	<h3>Add a new topic</h3>
+	<form method="POST">
+		<label for="category">Title:</label>
+			<input type="text" name="category" size="50"></input><br/>
+		<label for="description">Author:</label>
+			<input type="text" name="description" size="50"></input><br/>
+			
+			<input type="hidden" name="user_id" value="1" size="50"></input><br/>
+
+			<input type="submit"></input>
+	</form>	
+		
+</body>
+</html>
