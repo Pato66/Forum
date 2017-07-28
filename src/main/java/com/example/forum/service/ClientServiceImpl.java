@@ -8,9 +8,13 @@ import org.springframework.stereotype.Service;
 import com.example.forum.model.Topic;
 import com.example.forum.model.User;
 import com.example.forum.repository.ClientRepository;
+import com.example.forum.repository.UserRepository;
 
 @Service
 public class ClientServiceImpl implements ClientService{
+	
+	@Autowired
+	UserRepository userRepository;
 
 	@Autowired
 	ClientRepository clientRepository;
@@ -23,6 +27,21 @@ public class ClientServiceImpl implements ClientService{
 	@Override
 	public List<User> getUser(int id) {
 		return clientRepository.getUser(id);
+	}
+
+	@Override
+	public boolean registerNewUser(User newUser) {
+		if(clientRepository.ifUserExistInDatabase(newUser.getLogin())){
+			return false;
+		}
+		else{
+			newUser.setCity("fill in");
+			newUser.setEmail("fill in");
+			newUser.setFirstName("fill in");
+			newUser.setLastName("fill in");
+			userRepository.save(newUser);
+			return true;
+		}
 	}
 	
 }

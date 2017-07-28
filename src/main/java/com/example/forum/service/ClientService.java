@@ -8,4 +8,6 @@ import com.example.forum.model.User;
 public interface ClientService {
 	List<Topic> showTopic(String category);
 	List<User> getUser(int id);
+	boolean registerNewUser(User newUser);
+	
 }

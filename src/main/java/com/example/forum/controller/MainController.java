@@ -20,4 +20,9 @@ public class MainController {
 		model.addAttribute("topics", clientService.getUser(1));
 		return "index";
 	}
+	
+	@RequestMapping(value="main")
+	public String mainUserPage(Model model){
+		return "main";
+	}
 }
