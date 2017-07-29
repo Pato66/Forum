@@ -20,8 +20,8 @@ public class ClientServiceImpl implements ClientService{
 	ClientRepository clientRepository;
 
 	@Override
-	public List<Topic> showTopic(String category) {
-		return clientRepository.showTopics(category);
+	public List<Topic> showTopic(String category, int limit, int start) {
+		return clientRepository.showTopics(category, limit, start);
 	}
 
 	@Override
@@ -42,6 +42,11 @@ public class ClientServiceImpl implements ClientService{
 			userRepository.save(newUser);
 			return true;
 		}
+	}
+
+	@Override
+	public boolean checkUserInDatabase(User user) {
+		return clientRepository.checkUserInDatabase(user);
 	}
 	
 }

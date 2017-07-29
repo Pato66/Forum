@@ -34,7 +34,7 @@ public class TopicController {
 	
 	@RequestMapping(value="/topics", method=RequestMethod.GET)
 	public String showTopisc(Model model) {
-		model.addAttribute("topics", clientService.showTopic("all") );
+		model.addAttribute("topics", clientService.showTopic("all", 3, 0) );
 		return "topics";
 	}
 	
@@ -42,7 +42,7 @@ public class TopicController {
 	public String addToReadingList( Topic newTopic) {
 		newTopic.setDateOfCreation(new Date());
 		User user = new User();
-		user.setUserId(1);
+		user.setUserId(2);
 		newTopic.setUser(user);
 		topicRepository.save(newTopic);
 		return "redirect:/addTopic";

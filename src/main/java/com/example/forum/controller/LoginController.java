@@ -11,24 +11,24 @@ import com.example.forum.repository.UserRepository;
 import com.example.forum.service.ClientService;
 
 @Controller
-public class RegisterController {
+public class LoginController {
 	
 	@Autowired
 	ClientService clientService;
 
-	@RequestMapping(value="registration", method=RequestMethod.GET)
+	@RequestMapping(value="login", method=RequestMethod.GET)
 	public String registaration(Model model){
 		model.addAttribute("newUser", new User());
 		return "registration";
 	}
 	
-	@RequestMapping(value="registration", method=RequestMethod.POST)
+	@RequestMapping(value="login", method=RequestMethod.POST)
 	public String registarationPOST(Model model, User newUser){
 		if(clientService.registerNewUser(newUser)){
-			return "redirect:/login";
+			return "redirect:/main";
 		}
 		else{
-			return "redirect:/registration";
+			return "redirect:/login";
 		}
 	}
 }

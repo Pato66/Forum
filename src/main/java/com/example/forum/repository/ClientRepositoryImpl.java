@@ -26,9 +26,9 @@ public class ClientRepositoryImpl implements ClientRepository {
 	private EntityManager entityManager;
 	
 	@Override
-	public List<Topic> showTopics(String category) {
-		String query= "select t from Topic t";
-		TypedQuery<Topic> q = entityManager.createQuery(query, Topic.class);
+	public List<Topic> showTopics(String category, int limit, int start) {
+		String query= "select t from Topic t order by dateOfCreation desc";
+		TypedQuery<Topic> q = entityManager.createQuery(query, Topic.class).setFirstResult(start).setMaxResults(limit);
         return q.getResultList();
 		
 	}
@@ -44,9 +44,21 @@ public class ClientRepositoryImpl implements ClientRepository {
 	public boolean ifUserExistInDatabase(String login) {
 		String query= "select u from User u WHERE login='" + login + "'";
 		TypedQuery<User> q = entityManager.createQuery(query, User.class);
-		logger.info("------------------------------------------------------------");
+		logger.info("-------------------------------------------------------------------------------------");
 		logger.info("Query returned:" + q.getFirstResult()+" | size" + q.getResultList().size() );
-		logger.info("------------------------------------------------------------");
+		logger.info("------------------------------------------------------------------------------------");
+		if(q.getResultList().size() != 0){
+			return true;
+		}
+		else{
+			return false;
+		}
+	}
+
+	@Override
+	public boolean checkUserInDatabase(User user) {
+		String query= "select u from User u WHERE login='" + user.getLogin() + "' and password='" + user.getPassword() + "'";
+		TypedQuery<User> q = entityManager.createQuery(query, User.class);
 		if(q.getResultList().size() != 0){
 			return true;
 		}
