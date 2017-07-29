@@ -34,7 +34,16 @@ public class TopicController {
 	
 	@RequestMapping(value="/topics", method=RequestMethod.GET)
 	public String showTopisc(Model model) {
+		model.addAttribute("start",0);
 		model.addAttribute("topics", clientService.showTopic("all", 3, 0) );
+		return "topics";
+	}
+	
+	@RequestMapping(value="/topics", method=RequestMethod.POST)
+	public String showTopiscPOST(Model model, int start ) {
+		int limit=3;
+		model.addAttribute("start", start += limit);
+		model.addAttribute("topics", clientService.showTopic("all", limit, Integer.valueOf(start) ));
 		return "topics";
 	}
 	
