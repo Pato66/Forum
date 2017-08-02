@@ -13,12 +13,12 @@ public class Message  implements java.io.Serializable {
      private long messageId;
 	 
 	 @NotNull
-	 @ManyToOne(cascade = CascadeType.ALL)
+	 @ManyToOne(cascade = CascadeType.MERGE )
 	 @JoinColumn(name = "topic_id")
      private Topic topic;
      
      @NotNull
-     @ManyToOne(cascade = CascadeType.ALL)
+     @ManyToOne(cascade = CascadeType.MERGE )
      @JoinColumn(name = "user_id")
      private User user;
      

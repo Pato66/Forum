@@ -6,18 +6,28 @@
 	</head>
 	<body>	
 
-		<h2>Your Reading List</h2>
+		<h2>All topics</h2>
 		<div th:unless="${#lists.isEmpty(topics)}">
 			<dl th:each="topic : ${topics}">
-				<dt class="bookHeadline">
-				User: <span th:text="${topic.User.userId}"></span>
-				Date: <span th:text="${topic.dateOfCreation}"></span>
-				Category: <span th:text="${topic.category}"></span>
-				</dt>
-				<dd class="bookDescription">
-					Description <span th:if="${topic.description}" th:text="${topic.description}" ></span>
-					No description available <span th:if="${topic.description eq null}"> </span>
-				</dd>
+				<form action="#" th:action="@{/topic}" th:object="${topic}" method="post">
+				
+					<dt class="bookHeadline">
+					Id: <span th:text="${topic.topicId}"></span>
+					
+					User: <span th:text="${topic.User.userId}"></span>
+					Date: <span th:text="${topic.dateOfCreation}"></span>
+					Category: <span th:text="${topic.category}"></span>
+					</dt>
+					
+					<dd class="bookDescription">
+						Description <span th:if="${topic.description}" th:text="${topic.description}" ></span>
+						No description available <span th:if="${topic.description eq null}"> </span>
+					</dd>
+					
+					<input type="hidden" id="topicId"  name="topicId" th:value="*{topicId}"></input>
+					<input type="submit" value="Show details"></input>
+					
+				</form>
 				<h4>---------------------------------------------------------------------------------</h4>
 			</dl>
 		</div>

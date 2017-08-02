@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.example.forum.model.Message;
 import com.example.forum.model.Topic;
 import com.example.forum.model.User;
 import com.example.forum.repository.ClientRepository;
@@ -48,5 +49,11 @@ public class ClientServiceImpl implements ClientService{
 	public boolean checkUserInDatabase(User user) {
 		return clientRepository.checkUserInDatabase(user);
 	}
-	
+
+	@Override
+	public List<Message> findAllByMessagesTopicId(Long topicId) {
+		return clientRepository.findAllMessagesByTopicId(topicId);
+	}
+
+
 }

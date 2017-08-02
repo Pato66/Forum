@@ -56,4 +56,12 @@ public class TopicController {
 		topicRepository.save(newTopic);
 		return "redirect:/addTopic";
 	}
+	
+	@RequestMapping(value="/topic", method=RequestMethod.POST)
+	public String showTopicDetails(Model model, String  topicId) {
+		//model.addAttribute("topic", topicRepository.findOne(Long.valueOf(topicId)) );
+		model.addAttribute("messages", clientService.findAllByMessagesTopicId(Long.valueOf(topicId)) );
+		return "topic";
+	}
+	
 }

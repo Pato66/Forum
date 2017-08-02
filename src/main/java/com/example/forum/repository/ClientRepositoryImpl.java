@@ -10,6 +10,7 @@ import javax.transaction.Transactional;
 
 import org.springframework.stereotype.Repository;
 
+import com.example.forum.model.Message;
 import com.example.forum.model.Topic;
 import com.example.forum.model.User;
 
@@ -65,6 +66,16 @@ public class ClientRepositoryImpl implements ClientRepository {
 		else{
 			return false;
 		}
+	}
+
+	@Override
+	public List<Message> findAllMessagesByTopicId(Long topicId) {
+		String query= "select m from Message m WHERE topic=" + topicId + "";
+		TypedQuery<Message> q = entityManager.createQuery(query, Message.class);
+		logger.info("-------------------------------------------------------------------------------------");
+		logger.info("MESSAGE TABLE : Size: " + q.getResultList().size() );
+		logger.info("------------------------------------------------------------------------------------");
+		return q.getResultList();
 	}
 
 }
