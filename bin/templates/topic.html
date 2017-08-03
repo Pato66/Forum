@@ -2,25 +2,31 @@
 <html xmlns:th="http://www.thymeleaf.org" >
 	<head>
 		<title>Topic</title>
-		
+		<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css"></link>
 	</head>
 	<body>	
 
 		 <h2>All topics</h2>
 		<div th:unless="${#lists.isEmpty(messages)}">
 			<dl th:each="message : ${messages}">
-			
-					<dt class="bookHeadline">
-						
-					Thumbs up: <span th:text="${message.thumbsUp}"></span>
-					Thumbs down: <span th:text="${message.thumbsDown}"></span>
-					
-					Date: <span th:text="${message.dateOfPublish}"></span>
-					Category: <span th:text="${message.contents}"></span>
-					
-					</dt>								
 				
-				<h4>---------------------------------------------------------------------------------</h4>
+				<div class="thumbnail">
+					<div class="caption">
+						<dt class="bookHeadline">
+							
+						Thumbs up: <span th:text="${message.thumbsUp}"></span>
+						Thumbs down: <span th:text="${message.thumbsDown}"></span>
+						
+						Date: <span th:text="${message.dateOfPublish}"></span>
+						
+						<dd class="bookDescription">
+							Category: <span th:text="${message.contents}"></span>
+						</dd>
+						
+						</dt>								
+				
+					</div>
+				</div>
 			</dl>
 		</div>
 		<div th:if="${#lists.isEmpty(messages)}">

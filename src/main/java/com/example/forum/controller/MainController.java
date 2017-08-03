@@ -15,7 +15,7 @@ public class MainController {
 	
 	@RequestMapping(value="index")
 	public String index(Model model){
-		model.addAttribute("mess", "dodano");
+		model.addAttribute("mess", "Main page");
 		//model.addAttribute("topics", clientService.showTopic("all"));
 		model.addAttribute("topics", clientService.getUser(1));
 		return "index";

@@ -1,16 +1,21 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" >
 <head>
-<meta charset="UTF-8"> </meta>
-<title th:text="${mess}">mocking text</title>
+	<meta charset="UTF-8"> </meta>
+	<title th:text="${mess}">mocking text</title>
+	<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css"></link>
 </head>
 <body>
-		<h2 th:text="${mess}"></h2>
-		<a th:href="@{/addTopic}"> Add new topic |</a>
-		<a th:href="@{/topics}">| Show topics </a>
-		<a th:href="@{/registration}">| Registration </a>
+	<div class="jumbotron">
+		<div class="container">	
+			<h2 th:text="${mess}"></h2>
+			<a th:href="@{/addTopic}"> Add new topic |</a>
+			<a th:href="@{/topics}">| Show topics </a>
+			<a th:href="@{/registration}">| Registration </a>
+		</div>
+	</div>
 		
-		<table>
+		<!--  <table>
    			<th:block th:each="topic : ${topics}">
      			 <tr>
          			<td th:text="${topic.firstName}">...</td>
@@ -22,7 +27,7 @@
          		
       			</tr>
    			</th:block>
-		</table>
+		</table>  -->
 		
 </body>
 </html>

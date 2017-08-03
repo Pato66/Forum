@@ -1,11 +1,42 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" >
 <head>
-<meta charset="UTF-8"> </meta>
-<title>Add topic</title>
+	<meta charset="UTF-8"> </meta>
+	<title>Add topic</title>
+	<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css"></link>
 </head>
 <body>
 	
+	<h3>Add a new topic</h3>
+	<section class="container">
+		<form method="POST" class="form-horizontal">
+			<fieldset>
+				<div class="form-group">
+					
+					<label for="login"  class="control-label col-lg-2 col-lg-2" >Title:</label>
+					<div class="col-lg-10">
+						<input type="text" name="category" size="30" class="form:input-large"  ></input><br/>
+					</div>
+				</div>
+				
+				<div class="form-group">	
+					<label for="password"  class="control-label col-lg-2 col-lg-2" >Description:</label>
+					<div class="col-lg-10">
+						<input type="text" name="description" size="30" class="form:input-large"  ></input><br/>
+					</div>
+				</div>
+					
+				<div class="form-group">
+					<div class="col-lg-offset-2 col-lg-10">	
+						<input type="hidden" name="user_id" value="2" size="50"></input><br/>
+						<input type="submit" class="btn btn-primary" ></input>
+					</div>	
+				</div>
+			</fieldset>
+		</form>	
+	</section>	
+	
+	<!--  
 	<h3>Add a new topic</h3>
 	<form method="POST">
 		<label for="category">Title:</label>
@@ -15,8 +46,11 @@
 			
 			<input type="hidden" name="user_id" value="1" size="50"></input><br/>
 
-			<input type="submit"></input>
+			<input type="submit" class="btn btn-primary" ></input>
 	</form>	
+	
+	-->
+	
 		
 </body>
 </html>

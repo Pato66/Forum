@@ -2,6 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org" >
 	<head>
 		<title>Reading List</title>
+		<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css"></link>
 		
 	</head>
 	<body>	
@@ -11,6 +12,8 @@
 			<dl th:each="topic : ${topics}">
 				<form action="#" th:action="@{/topic}" th:object="${topic}" method="post">
 				
+				<div class="thumbnail">
+				<div class="caption">
 					<dt class="bookHeadline">
 					Id: <span th:text="${topic.topicId}"></span>
 					
@@ -25,13 +28,16 @@
 					</dd>
 					
 					<input type="hidden" id="topicId"  name="topicId" th:value="*{topicId}"></input>
-					<input type="submit" value="Show details"></input>
-					
+					<input type="submit" value="Show details" class="btn btn-info" ></input>
+				
+				</div>
+				</div>
+				
 				</form>
-				<h4>---------------------------------------------------------------------------------</h4>
+				
 			</dl>
 		</div>
-		<div th:if="${#lists.isEmpty(books)}">
+		<div th:if="${#lists.isEmpty(topics)}">
 			<p>Content is not available now.</p>
 		</div>
 		
@@ -39,7 +45,7 @@
 			<label for="login">:</label>
 				<input type="hidden" id="start" name="start" th:value="*{start}" />
 
-				<input type="submit" value="Next page"></input>
+				<input type="submit" value="Next page" class="btn btn-primary"></input>
 		</form>	 
 		
 	</body>
