@@ -19,7 +19,7 @@ public class LoginController {
 	@RequestMapping(value="login", method=RequestMethod.GET)
 	public String registaration(Model model){
 		model.addAttribute("newUser", new User());
-		return "registration";
+		return "login";
 	}
 	
 	@RequestMapping(value="login", method=RequestMethod.POST)

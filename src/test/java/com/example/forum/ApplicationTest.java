@@ -25,6 +25,6 @@ public class ApplicationTest {
     @Test
     public void shouldReturnDefaultMessage() throws Exception {
         this.mockMvc.perform(get("/index")).andDo(print()).andExpect(status().isOk())
-                .andExpect(content().string(containsString("dodano")));
+                .andExpect(content().string(containsString("Main page")));
     }
 }

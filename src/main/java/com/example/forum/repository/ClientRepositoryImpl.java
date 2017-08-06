@@ -78,4 +78,6 @@ public class ClientRepositoryImpl implements ClientRepository {
 		return q.getResultList();
 	}
 
+
+
 }

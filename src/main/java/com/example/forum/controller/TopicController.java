@@ -11,8 +11,10 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.example.forum.model.Message;
 import com.example.forum.model.Topic;
 import com.example.forum.model.User;
+import com.example.forum.repository.MessageRepository;
 import com.example.forum.repository.TopicRepository;
 import com.example.forum.service.ClientService;
 
@@ -24,6 +26,9 @@ public class TopicController {
 
 	@Autowired
 	TopicRepository topicRepository;
+	
+	@Autowired
+	MessageRepository messageRepository;
 	
 	
 	@RequestMapping(value="/addTopic", method=RequestMethod.GET)
@@ -58,9 +63,23 @@ public class TopicController {
 	}
 	
 	@RequestMapping(value="/topic", method=RequestMethod.POST)
-	public String showTopicDetails(Model model, String  topicId) {
+	public String showTopicDetails(Model model, String  topicId, String description) {
 		//model.addAttribute("topic", topicRepository.findOne(Long.valueOf(topicId)) );
 		model.addAttribute("messages", clientService.findAllByMessagesTopicId(Long.valueOf(topicId)) );
+		model.addAttribute("description", description);
+		model.addAttribute("topicId", topicId);
+		return "topic";
+	}
+	
+	@RequestMapping(value="/topicAddMessage", method=RequestMethod.POST)
+	public String addMessage(Model model, Message message, String  topicId, String description) {
+		message.setDateOfPublish(new Date());
+		message.setThumbsDown(0);
+		message.setThumbsUp(0);
+		messageRepository.save(message);
+		model.addAttribute("messages", clientService.findAllByMessagesTopicId(Long.valueOf(topicId)) );
+		model.addAttribute("description", description);
+		model.addAttribute("topicId", topicId);
 		return "topic";
 	}
 	

@@ -1,9 +1,15 @@
 package com.example.forum.model;
 
-import java.util.HashSet;
-import java.util.Set;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
-import javax.persistence.*;
+import org.hibernate.validator.constraints.NotEmpty;
 
 @Entity
 @Table(name="user", schema = "public")
@@ -19,7 +25,12 @@ public class User  implements java.io.Serializable {
      private String city;
      private String email;
      
+     @NotEmpty(message = "Please enter your login.")
+     @Size(min=3, max=30, message = "Length of login should be between 3 and 30 characters.")
      private String login;
+     
+     @NotEmpty(message = "Please enter your password.")
+     @Size(min=3, max=30, message = "Length of password should be between 3 and 30 characters.")
      private String password;
 
 
@@ -47,12 +58,23 @@ public class User  implements java.io.Serializable {
     }
 
 	
-    public User(long userId, String firstName, String lastName, String city, String email) {
+    public User(long userId, String login, String password, String firstName, String lastName, String city, String email) {
         this.userId = userId;
         this.firstName = firstName;
         this.lastName = lastName;
         this.city = city;
         this.email = email;
+        this.login = login;
+        this.password = password;
+    }
+    
+    public User(String login, String password, String firstName, String lastName, String city, String email) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.city = city;
+        this.email = email;
+        this.login = login;
+        this.password = password;
     }
   
    

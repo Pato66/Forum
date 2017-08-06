@@ -28,6 +28,8 @@
 					</dd>
 					
 					<input type="hidden" id="topicId"  name="topicId" th:value="*{topicId}"></input>
+					<input type="hidden" id="description" name="description" th:value="*{description}" />
+					
 					<input type="submit" value="Show details" class="btn btn-info" ></input>
 				
 				</div>
@@ -44,7 +46,7 @@
 		<form method="POST">
 			<label for="login">:</label>
 				<input type="hidden" id="start" name="start" th:value="*{start}" />
-
+				
 				<input type="submit" value="Next page" class="btn btn-primary"></input>
 		</form>	 
 		
