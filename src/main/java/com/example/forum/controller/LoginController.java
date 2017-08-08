@@ -24,11 +24,6 @@ public class LoginController {
 	
 	@RequestMapping(value="login", method=RequestMethod.POST)
 	public String registarationPOST(Model model, User newUser){
-		if(clientService.registerNewUser(newUser)){
-			return "redirect:/main";
-		}
-		else{
-			return "redirect:/login";
-		}
+		   return "main";
 	}
 }

@@ -12,7 +12,7 @@ import javax.validation.constraints.Size;
 import org.hibernate.validator.constraints.NotEmpty;
 
 @Entity
-@Table(name="user", schema = "public")
+@Table(name="users", schema = "public")
 public class User  implements java.io.Serializable {
 
 	 @Id 
@@ -24,8 +24,9 @@ public class User  implements java.io.Serializable {
      private String lastName;
      private String city;
      private String email;
-     
-     @NotEmpty(message = "Please enter your login.")
+     private String enabled; 
+
+	 @NotEmpty(message = "Please enter your login.")
      @Size(min=3, max=30, message = "Length of login should be between 3 and 30 characters.")
      private String login;
      
@@ -33,6 +34,15 @@ public class User  implements java.io.Serializable {
      @Size(min=3, max=30, message = "Length of password should be between 3 and 30 characters.")
      private String password;
 
+     
+     public String getRole() {
+		return enabled;
+	}
+
+
+	public void setRole(String role) {
+		this.enabled = role;
+	}
 
     public String getLogin() {
 		return login;

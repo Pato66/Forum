@@ -18,6 +18,7 @@ public class RegisterController {
 	
 	@Autowired
 	ClientService clientService;
+	
 	private UserRepository userRepository;
 	
 	@Autowired
@@ -35,14 +36,18 @@ public class RegisterController {
 	@RequestMapping(value="registration", method=RequestMethod.POST)
 	public String registarationPOST(Model model,@Valid User user, BindingResult bindingResult){
 		
-		 if (bindingResult.hasErrors()) {
-		        return "registration";
-		 } 
+		if (bindingResult.hasErrors()) {
+			if(!clientService.registerNewUser(user)){
+				bindingResult.rejectValue("login", "login", "This login is already taken");
+			}
+		    return "registration";
+		} 
 		
 		if(clientService.registerNewUser(user)){
 			return "redirect:/login";
 		}
 		else{
+			bindingResult.rejectValue("login", "login", "This login is already taken");
 			return "redirect:/registration";
 		}
 	}
