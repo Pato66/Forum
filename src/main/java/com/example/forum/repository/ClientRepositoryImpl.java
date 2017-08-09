@@ -86,6 +86,16 @@ public class ClientRepositoryImpl implements ClientRepository {
 		return q.getSingleResult();
 	}
 
+	@Override
+	public int getTopiscForCateroryQuantuty(String category) {
+		String query= "select t from Topic t";// WHERE category='" + category + "'";
+		TypedQuery<Topic> q = entityManager.createQuery(query, Topic.class);
+		logger.info("-------------------------------------------------------------------------------------");
+		logger.info("MESSAGE TABLE : Size: " + q.getResultList().size() );
+		logger.info("------------------------------------------------------------------------------------");
+		return q.getResultList().size();
+	}
+
 
 
 }

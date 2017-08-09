@@ -48,9 +48,10 @@ public class TopicController {
 	}
 	
 	@RequestMapping(value="/topics", method=RequestMethod.POST)
-	public String showTopiscPOST(Model model, int start ) {
+	public String showTopiscPOST(Model model, int start, String direction ) {
 		int limit=3;
-		model.addAttribute("start", start += limit);
+		start = clientService.getNextStartValueToShow(start, limit, direction, "all");
+		model.addAttribute("start", start);
 		model.addAttribute("topics", clientService.showTopic("all", limit, Integer.valueOf(start) ));
 		model.addAttribute("author", clientService.getUsername());
 		return "topics";
@@ -68,11 +69,12 @@ public class TopicController {
 	
 	@RequestMapping(value="/topic", method=RequestMethod.POST)
 	public String showTopicDetails(Model model, String  topicId, String description) {
-		//model.addAttribute("topic", topicRepository.findOne(Long.valueOf(topicId)) );
+		String username  = clientService.getUsername();
 		model.addAttribute("messages", clientService.findAllByMessagesTopicId(Long.valueOf(topicId)) );
 		model.addAttribute("description", description);
 		model.addAttribute("topicId", topicId);
-		model.addAttribute("author", clientService.getUsername());
+		model.addAttribute("author", username);
+		model.addAttribute("authorId",clientService.findByUsername(username).getUserId());
 		return "topic";
 	}
 	
@@ -82,10 +84,12 @@ public class TopicController {
 		message.setThumbsDown(0);
 		message.setThumbsUp(0);
 		messageRepository.save(message);
+		String username  = clientService.getUsername();
 		model.addAttribute("messages", clientService.findAllByMessagesTopicId(Long.valueOf(topicId)) );
 		model.addAttribute("description", description);
 		model.addAttribute("topicId", topicId);
-		model.addAttribute("author", clientService.getUsername());
+		model.addAttribute("author", username);
+		model.addAttribute("authorId",clientService.findByUsername(username).getUserId());
 		//------------
 		return "topic";
 	}

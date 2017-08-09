@@ -27,8 +27,7 @@
 						<dt class="bookHeadline">
 							
 						Thumbs up: <span th:text="${message.thumbsUp}"></span>
-						Thumbs down: <span th:text="${message.thumbsDown}"></span>
-						
+						Thumbs down: <span th:text="${message.thumbsDown}"></span>				
 						Date: <span th:text="${message.dateOfPublish}"></span>
 						
 						<dd class="bookDescription">
@@ -47,17 +46,18 @@
 		
 		<form method="POST" action="#" th:action="@{/topicAddMessage}" >
 			<label for="login">:</label>
-				<!-- <input type="text" id="contents" name="contents" /> -->
 				
 				<textarea class="input" rows="10" cols="80" id="contents" name="contents" ></textarea>
 				<input type="hidden" id="topicId" name="topic" th:value="*{topicId}" />
-				<input type="hidden" id="userId" name="user" th:value="13" />
+				<input type="hidden" id="userId" name="user" th:value="${authorId}" />
 				
 				<input type="hidden" id="topicId"  name="topicId" th:value="*{topicId}"></input>
 				<input type="hidden" id="description" name="description" th:value="*{description}" />
 
 				<input type="submit" value="Add comment" class="btn btn-primary"></input>
 		</form>	 
+		
+		
 	
 	 <br/>
 	 <br/>

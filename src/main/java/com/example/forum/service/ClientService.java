@@ -14,4 +14,5 @@ public interface ClientService {
 	List<Message> findAllByMessagesTopicId(Long topicId);
 	String getUsername();
 	User findByUsername(String username); 
+	int getNextStartValueToShow(int presentStart, int shift, String direction, String category);
 }

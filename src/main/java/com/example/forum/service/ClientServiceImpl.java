@@ -69,5 +69,20 @@ public class ClientServiceImpl implements ClientService{
 		return clientRepository.findByUsername(username);
 	}
 
+	@Override
+	public int getNextStartValueToShow(int presentStart, int shift, String direction, String category) {
+		int quantityOfRecords = clientRepository.getTopiscForCateroryQuantuty(category);
+		if(direction.equalsIgnoreCase("back")){
+			shift = -shift;
+		}
+		presentStart += shift;
+		if(presentStart < 0){
+			presentStart = 0;
+		}	
+		if(presentStart >= quantityOfRecords){
+			presentStart -= shift;
+		}
+		return presentStart; 
+	}
 
 }

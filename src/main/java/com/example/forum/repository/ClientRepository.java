@@ -9,6 +9,7 @@ import com.example.forum.model.User;
 
 public interface ClientRepository {
 	List<Topic> showTopics(String category, int limit, int start);
+	int getTopiscForCateroryQuantuty(String category);
 	List<Message> findAllMessagesByTopicId(Long topicId);
 	List<User> getUser(int id);
 	boolean ifUserExistInDatabase(String login);
