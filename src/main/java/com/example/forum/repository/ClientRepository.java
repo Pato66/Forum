@@ -13,6 +13,6 @@ public interface ClientRepository {
 	List<User> getUser(int id);
 	boolean ifUserExistInDatabase(String login);
 	boolean checkUserInDatabase(User user);
-
+	User findByUsername(String username);
 	
 }

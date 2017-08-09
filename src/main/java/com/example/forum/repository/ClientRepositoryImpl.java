@@ -78,6 +78,14 @@ public class ClientRepositoryImpl implements ClientRepository {
 		return q.getResultList();
 	}
 
+	@Override
+	public User findByUsername(String username) {
+		String query= "select u from User u WHERE login='" + username + "'";
+		TypedQuery<User> q = entityManager.createQuery(query, User.class);
+		logger.info("User : Size: " + q.getSingleResult().getLogin() );
+		return q.getSingleResult();
+	}
+
 
 
 }

@@ -13,4 +13,5 @@ public interface ClientService {
 	boolean checkUserInDatabase(User user);
 	List<Message> findAllByMessagesTopicId(Long topicId);
 	String getUsername();
+	User findByUsername(String username); 
 }

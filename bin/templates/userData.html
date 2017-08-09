@@ -16,7 +16,47 @@
 			 
       	</div>
     </div>
-     
+    
+    		
+    		<div class="row" style="margin-left:20px; align:center" >
+    			<h2>User data</h2>
+				<form action="#" th:action="@{/userData}" th:object="${user}" class="form-horizontal" method="post">		
+					<fieldset>
+						<label for="password"  class="control-label col-lg-2 col-lg-2" >Password</label>
+						<div class="col-lg-10">
+					    	<input type="text" id="password"  name="password" th:value="*{password}" class="input-lg"></input>
+					    </div><br/>
+					    <label for="firstName"  class="control-label col-lg-2 col-lg-2" >First Name</label>
+					    <div class="col-lg-10">
+							<input type="text" id="firstName" name="firstName" th:value="*{firstName}" class="input-lg" /> 
+						</div>
+						<label for="lastName"  class="control-label col-lg-2 col-lg-2" >Last Name</label>
+						<div class="col-lg-10">
+							<input type="text" id="lastName" name="lastName" th:value="*{lastName}" class="input-lg" /> 
+						</div>
+						<label for="city"  class="control-label col-lg-2 col-lg-2" >City</label>
+						<div class="col-lg-10">
+							<input type="text" id="city" name="city" th:value="*{city}" class="input-lg" /> 
+						</div>
+						<label for="email"  class="control-label col-lg-2 col-lg-2" >Email</label>
+						<div class="col-lg-10">
+							<input type="text" id="email" name="email" th:value="*{email}" class="input-lg" /> 
+						</div>
+						
+						<input type="hidden" id="userId" name="userId" th:value="*{userId}" /> 
+						<input type="hidden" id="login" name="login" th:value="*{login}" /> 
+						<input type="hidden" id="enabled" name="enabled" th:value="*{enabled}" /> 
+						<br/><br/>
+						
+						<div class="form-group">
+							<div class="col-lg-offset-2 col-lg-10">					
+								<input type="submit" value="Change data" class="btn btn-info" ></input>
+							</div>
+						</div>
+					
+					</fieldset>
+				</form>
+     		</div>
      <br/> 
      
  </body>
