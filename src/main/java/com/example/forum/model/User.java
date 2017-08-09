@@ -24,7 +24,7 @@ public class User  implements java.io.Serializable {
      private String lastName;
      private String city;
      private String email;
-     private String enabled; 
+     private boolean enabled; 
 
 	 @NotEmpty(message = "Please enter your login.")
      @Size(min=3, max=30, message = "Length of login should be between 3 and 30 characters.")
@@ -35,13 +35,13 @@ public class User  implements java.io.Serializable {
      private String password;
 
      
-     public String getRole() {
+     public boolean getEnabled() {
 		return enabled;
 	}
 
 
-	public void setRole(String role) {
-		this.enabled = role;
+	public void setEnabled(boolean enabled) {
+		this.enabled = enabled;
 	}
 
     public String getLogin() {

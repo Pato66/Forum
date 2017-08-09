@@ -6,6 +6,15 @@
 	<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css"></link>
 </head>
 <body>
+
+	<div class="jumbotron">
+		<div class="container">	
+			<h2 th:text="${mess}"></h2>
+			<a th:href="@{/index}">Start page |</a>
+			<a th:href="@{/main}">| Login </a>
+		</div>
+	</div>
+
 	<br/>
 	<h3> Registration form </h3>
 	<br/>

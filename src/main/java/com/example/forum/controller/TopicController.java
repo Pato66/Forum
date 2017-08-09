@@ -4,6 +4,8 @@ import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -41,6 +43,7 @@ public class TopicController {
 	public String showTopisc(Model model) {
 		model.addAttribute("start",0);
 		model.addAttribute("topics", clientService.showTopic("all", 3, 0) );
+		model.addAttribute("author", clientService.getUsername());
 		return "topics";
 	}
 	
@@ -49,6 +52,7 @@ public class TopicController {
 		int limit=3;
 		model.addAttribute("start", start += limit);
 		model.addAttribute("topics", clientService.showTopic("all", limit, Integer.valueOf(start) ));
+		model.addAttribute("author", clientService.getUsername());
 		return "topics";
 	}
 	
@@ -68,6 +72,7 @@ public class TopicController {
 		model.addAttribute("messages", clientService.findAllByMessagesTopicId(Long.valueOf(topicId)) );
 		model.addAttribute("description", description);
 		model.addAttribute("topicId", topicId);
+		model.addAttribute("author", clientService.getUsername());
 		return "topic";
 	}
 	
@@ -80,6 +85,8 @@ public class TopicController {
 		model.addAttribute("messages", clientService.findAllByMessagesTopicId(Long.valueOf(topicId)) );
 		model.addAttribute("description", description);
 		model.addAttribute("topicId", topicId);
+		model.addAttribute("author", clientService.getUsername());
+		//------------
 		return "topic";
 	}
 	

@@ -10,7 +10,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.example.forum.model.User;
+import com.example.forum.model.UserRoles;
 import com.example.forum.repository.UserRepository;
+import com.example.forum.repository.UserRolesRepository;
 import com.example.forum.service.ClientService;
 
 @Controller
@@ -18,6 +20,9 @@ public class RegisterController {
 	
 	@Autowired
 	ClientService clientService;
+	
+	@Autowired
+	private UserRolesRepository userRolesRepository;
 	
 	private UserRepository userRepository;
 	
@@ -35,7 +40,7 @@ public class RegisterController {
 	
 	@RequestMapping(value="registration", method=RequestMethod.POST)
 	public String registarationPOST(Model model,@Valid User user, BindingResult bindingResult){
-		
+		user.setEnabled(true);
 		if (bindingResult.hasErrors()) {
 			if(!clientService.registerNewUser(user)){
 				bindingResult.rejectValue("login", "login", "This login is already taken");
@@ -44,7 +49,9 @@ public class RegisterController {
 		} 
 		
 		if(clientService.registerNewUser(user)){
-			return "redirect:/login";
+			
+			userRolesRepository.save(new UserRoles(user.getLogin(),"ROLE_USER"));
+			return "redirect:/main";
 		}
 		else{
 			bindingResult.rejectValue("login", "login", "This login is already taken");

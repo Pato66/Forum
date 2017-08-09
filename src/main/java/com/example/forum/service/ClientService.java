@@ -12,4 +12,5 @@ public interface ClientService {
 	boolean registerNewUser(User newUser);
 	boolean checkUserInDatabase(User user);
 	List<Message> findAllByMessagesTopicId(Long topicId);
+	String getUsername();
 }

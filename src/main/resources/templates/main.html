@@ -1,24 +1,23 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
  <head>
- <title>Welcome Security with Spring Boot!</title>
+	 <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css"></link>
+	 <title>Welcome Security with Spring Boot!</title>
  </head>
  <body>
-     <h1 style="color:blue"> Hello! This is Welcome Page!</h1>
+  <div class="jumbotron">
+		<div class="container">	
+
+		     <div th:replace="fragments/header :: header"/>
+		     
+			 <a th:href="@{/addTopic}"> Add new topic |</a>
+			 <a th:href="@{/topics}">| Show topics </a>
+			 <a th:href="@{/userData}">| User data </a>
+			 
+      	</div>
+    </div>
      
-     <a style="color:blue" th:href="@{/}">Go to Home Page!</a>
+     <br/> 
      
-     <a th:href="@{/addTopic}"> Add new topic |</a>
-	 <a th:href="@{/topics}">| Show topics </a>
-	 <a th:href="@{/userData}">| User data </a>
-      
-     MESS: <h2 th:text="${message}"></h2>
-	 AUTH: <h2 th:text="${author}"></h2>
-     
-     <br/>
-     
-     <form th:action="@{/logout}" method="post">
-         <input type="submit" value="Sign Out"/>
-     </form>
  </body>
 </html>

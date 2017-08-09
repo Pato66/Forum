@@ -23,6 +23,11 @@ public class UserRoles  implements java.io.Serializable {
 	 private String login;
 	 private String role;
 	 
+	 public UserRoles(String login, String role){
+		 this.login = login;
+		 this.role= role; 
+	 }
+	 
 	 public long getUserRoleId() {
 	 	 return userRoleId;
 	 }

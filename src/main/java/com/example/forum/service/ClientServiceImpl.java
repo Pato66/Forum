@@ -3,6 +3,8 @@ package com.example.forum.service;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import com.example.forum.model.Message;
@@ -53,6 +55,13 @@ public class ClientServiceImpl implements ClientService{
 	@Override
 	public List<Message> findAllByMessagesTopicId(Long topicId) {
 		return clientRepository.findAllMessagesByTopicId(topicId);
+	}
+
+	@Override
+	public String getUsername() {
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		return auth.getName(); 
+		
 	}
 
 

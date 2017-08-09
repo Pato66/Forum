@@ -6,12 +6,15 @@
 	</head>
 	<body>	
 	
+	
 	<div class="jumbotron">
 		<div class="container">	
+			 <div th:replace="fragments/header :: header"/>
+		
 			<h2 th:text="${mess}"></h2>
 			<a th:href="@{/addTopic}"> Add new topic |</a>
 			<a th:href="@{/topics}">| Show topics </a>
-			<a th:href="@{/registration}">| Registration </a>
+			<a th:href="@{/main}">| Main </a>
 		</div>
 	</div>
 
@@ -42,13 +45,13 @@
 			<p>Content is empty now.</p>
 		</div>
 		
-		<form method="POST" action="/topicAddMessage" >
+		<form method="POST" action="#" th:action="@{/topicAddMessage}" >
 			<label for="login">:</label>
 				<!-- <input type="text" id="contents" name="contents" /> -->
 				
 				<textarea class="input" rows="10" cols="80" id="contents" name="contents" ></textarea>
 				<input type="hidden" id="topicId" name="topic" th:value="*{topicId}" />
-				<input type="hidden" id="userId" name="user" th:value="2" />
+				<input type="hidden" id="userId" name="user" th:value="13" />
 				
 				<input type="hidden" id="topicId"  name="topicId" th:value="*{topicId}"></input>
 				<input type="hidden" id="description" name="description" th:value="*{description}" />
