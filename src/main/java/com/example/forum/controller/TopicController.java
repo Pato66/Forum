@@ -50,7 +50,7 @@ public class TopicController {
 	@RequestMapping(value="/topics", method=RequestMethod.POST)
 	public String showTopiscPOST(Model model, int start, String direction ) {
 		int limit=3;
-		start = clientService.getNextStartValueToShow(start, limit, direction, "all");
+		start = clientService.getNextStartValueToShow(start, limit, direction, "all", "topic");
 		model.addAttribute("start", start);
 		model.addAttribute("topics", clientService.showTopic("all", limit, Integer.valueOf(start) ));
 		model.addAttribute("author", clientService.getUsername());
@@ -70,11 +70,32 @@ public class TopicController {
 	@RequestMapping(value="/topic", method=RequestMethod.POST)
 	public String showTopicDetails(Model model, String  topicId, String description) {
 		String username  = clientService.getUsername();
-		model.addAttribute("messages", clientService.findAllByMessagesTopicId(Long.valueOf(topicId)) );
+		model.addAttribute("start",0);
+		model.addAttribute("messages", clientService.findAllByMessagesTopicId(Long.valueOf(topicId), 5, 0 ) );
 		model.addAttribute("description", description);
 		model.addAttribute("topicId", topicId);
 		model.addAttribute("author", username);
 		model.addAttribute("authorId",clientService.findByUsername(username).getUserId());
+		return "topic";
+	}
+	
+	@RequestMapping(value="/topicChangePage", method=RequestMethod.POST)
+	public String showTopicDetailsChangePage(Model model, String  topicId, 
+			String description, int start, String direction) {
+		
+		String username  = clientService.getUsername();
+		Long authorId = clientService.findByUsername(username).getUserId();
+		int limit=5;
+		start = clientService.getNextStartValueToShow(start, limit, direction, String.valueOf(topicId) , "message");
+		model.addAttribute("start", start);
+		
+		model.addAttribute("start",start);
+		model.addAttribute("messages", clientService.findAllByMessagesTopicId
+														( Long.valueOf(topicId), limit, Integer.valueOf(start) ) );
+		model.addAttribute("description", description);
+		model.addAttribute("topicId", topicId);
+		model.addAttribute("author", username);
+		model.addAttribute("authorId", authorId);
 		return "topic";
 	}
 	
@@ -85,7 +106,7 @@ public class TopicController {
 		message.setThumbsUp(0);
 		messageRepository.save(message);
 		String username  = clientService.getUsername();
-		model.addAttribute("messages", clientService.findAllByMessagesTopicId(Long.valueOf(topicId)) );
+		model.addAttribute("messages", clientService.findAllByMessagesTopicId(Long.valueOf(topicId), 0, 0 ));
 		model.addAttribute("description", description);
 		model.addAttribute("topicId", topicId);
 		model.addAttribute("author", username);

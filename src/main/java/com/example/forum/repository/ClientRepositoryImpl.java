@@ -69,11 +69,11 @@ public class ClientRepositoryImpl implements ClientRepository {
 	}
 
 	@Override
-	public List<Message> findAllMessagesByTopicId(Long topicId) {
-		String query= "select m from Message m WHERE topic=" + topicId + "";
-		TypedQuery<Message> q = entityManager.createQuery(query, Message.class);
+	public List<Message> findAllMessagesByTopicId(Long topicId, int limit, int start) {
+		String query= "select m from Message m WHERE topic=" + topicId+"";// + " order by dateOfPublish desc";
+		TypedQuery<Message> q = entityManager.createQuery(query, Message.class).setFirstResult(start).setMaxResults(limit);
 		logger.info("-------------------------------------------------------------------------------------");
-		logger.info("MESSAGE TABLE : Size: " + q.getResultList().size() );
+		logger.info("MESSAGE TABLE : Size: " + q.getResultList().size() + " | limit:"+limit+" | start:"+start);
 		logger.info("------------------------------------------------------------------------------------");
 		return q.getResultList();
 	}
@@ -90,8 +90,18 @@ public class ClientRepositoryImpl implements ClientRepository {
 	public int getTopiscForCateroryQuantuty(String category) {
 		String query= "select t from Topic t";// WHERE category='" + category + "'";
 		TypedQuery<Topic> q = entityManager.createQuery(query, Topic.class);
+		/*logger.info("-------------------------------------------------------------------------------------");
+		logger.info("TOPIC TABLE : Size: " + q.getResultList().size() );
+		logger.info("------------------------------------------------------------------------------------"); */
+		return q.getResultList().size();
+	}
+
+	@Override
+	public int getQuantityOfMessagesFromTopic(Long topicId) {
+		String query= "select m from Message m WHERE topic=" + topicId+"";
+		TypedQuery<Message> q = entityManager.createQuery(query, Message.class);
 		logger.info("-------------------------------------------------------------------------------------");
-		logger.info("MESSAGE TABLE : Size: " + q.getResultList().size() );
+		logger.info("MESSAGE TABLE : Size: " + q.getResultList().size());
 		logger.info("------------------------------------------------------------------------------------");
 		return q.getResultList().size();
 	}

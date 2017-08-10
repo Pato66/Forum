@@ -53,8 +53,8 @@ public class ClientServiceImpl implements ClientService{
 	}
 
 	@Override
-	public List<Message> findAllByMessagesTopicId(Long topicId) {
-		return clientRepository.findAllMessagesByTopicId(topicId);
+	public List<Message> findAllByMessagesTopicId(Long topicId, int limit, int start) {
+		return clientRepository.findAllMessagesByTopicId(topicId, limit, start);
 	}
 
 	@Override
@@ -70,11 +70,23 @@ public class ClientServiceImpl implements ClientService{
 	}
 
 	@Override
-	public int getNextStartValueToShow(int presentStart, int shift, String direction, String category) {
-		int quantityOfRecords = clientRepository.getTopiscForCateroryQuantuty(category);
+	public int getNextStartValueToShow(int presentStart, int shift, String direction, String category, String choose) {
+		int quantityOfRecords;
+		
+		if(choose.equalsIgnoreCase("topic")){
+			quantityOfRecords = clientRepository.getTopiscForCateroryQuantuty(category);
+		}
+		else{
+			quantityOfRecords = getQuantityOfMessagesFromTopic(Long.valueOf(category));
+		}
+				
 		if(direction.equalsIgnoreCase("back")){
 			shift = -shift;
 		}
+	
+		System.out.println("IN FUNCTION @@@@@@@@@@@@@@@@@@@ start:"+presentStart+" | topicId:" + Long.valueOf(category)
+		+" | choose:" + choose + " | quantity:" + quantityOfRecords +" | shift:" +shift+" | cat:"+category );
+		
 		presentStart += shift;
 		if(presentStart < 0){
 			presentStart = 0;
@@ -83,6 +95,11 @@ public class ClientServiceImpl implements ClientService{
 			presentStart -= shift;
 		}
 		return presentStart; 
+	}
+
+	@Override
+	public int getQuantityOfMessagesFromTopic(Long topicId) {
+		return clientRepository.getQuantityOfMessagesFromTopic(topicId);
 	}
 
 }

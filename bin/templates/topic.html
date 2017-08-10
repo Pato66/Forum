@@ -44,6 +44,36 @@
 			<p>Content is empty now.</p>
 		</div>
 		
+		<!-- next page -->
+		<form method="POST" action="#" th:action="@{/topicChangePage}">
+			<label for="login"></label>
+				<input type="text" id="start" name="start" th:value="*{start}" />
+				<input type="hidden" id="direction" name="direction" th:value="forward" />
+				
+				<input type="hidden" id="topicId" name="topic" th:value="*{topicId}" />
+				<input type="hidden" id="userId" name="user" th:value="${authorId}" />	
+				<input type="hidden" id="topicId"  name="topicId" th:value="*{topicId}"></input>
+				<input type="hidden" id="description" name="description" th:value="*{description}" />			
+				
+				<input type="submit" value="Next page" class="btn btn-primary"></input>
+		</form>	 
+		
+		<!-- previous page -->
+		<form method="POST" action="#" th:action="@{/topicChangePage}">
+			<label for="login"></label>
+				<input type="hidden" id="start" name="start" th:value="*{start}" />
+				<input type="hidden" id="direction" name="direction" th:value="back" />
+				
+				<input type="hidden" id="topicId" name="topic" th:value="*{topicId}" />
+				<input type="hidden" id="userId" name="user" th:value="${authorId}" />			
+				<input type="hidden" id="topicId"  name="topicId" th:value="*{topicId}"></input>
+				<input type="hidden" id="description" name="description" th:value="*{description}" />
+								
+				
+				<input type="submit" value="Previous page" class="btn btn-primary"></input>
+		</form>	 
+		
+		<!-- add comment -->
 		<form method="POST" action="#" th:action="@{/topicAddMessage}" >
 			<label for="login">:</label>
 				

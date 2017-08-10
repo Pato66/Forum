@@ -32,7 +32,7 @@
 					
 					<dd class="bookDescription">
 						Description <span th:if="${topic.description}" th:text="${topic.description}" ></span>
-						No description available <span th:if="${topic.description eq null}"> </span>
+					
 					</dd>
 					
 					<input type="hidden" id="topicId"  name="topicId" th:value="*{topicId}"></input>
@@ -50,17 +50,18 @@
 		<div th:if="${#lists.isEmpty(topics)}">
 			<p>Content is not available now.</p>
 		</div>
+		
 		<!-- next page -->
 		<form method="POST" action="#" th:action="@{/topics}">
-			<label for="login">:</label>
-				<input type="text" id="start" name="start" th:value="*{start}" />
+			<label for="login"></label>
+				<input type="hidden" id="start" name="start" th:value="*{start}" />
 				<input type="hidden" id="direction" name="direction" th:value="forward" />
 				<input type="submit" value="Next page" class="btn btn-primary"></input>
 		</form>	 
 		
 		<!-- previous page -->
 		<form method="POST" action="#" th:action="@{/topics}">
-			<label for="login">:</label>
+			<label for="login"></label>
 				<input type="hidden" id="start" name="start" th:value="*{start}" />
 				<input type="hidden" id="direction" name="direction" th:value="back" />
 				<input type="submit" value="Previous page" class="btn btn-primary"></input>
