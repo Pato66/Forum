@@ -2,8 +2,14 @@
 <div th:fragment="header">
 
  			 <h4 th:text="${author}">34</h4>
-		 	 <form th:action="@{/logout}" method="post">
-		         <input type="submit" value="Sign Out" class="btn-primary"/>
-		     </form>
+ 			 
+			 	 <form th:action="@{/logout}" method="post">
+			 	 	 <div class="row">
+					    <div class="form-group">
+			         		<input type="submit" value="Sign Out" class="btn btn-primary"/>
+			         	</div>
+			         </div>
+			     </form>
+		   
 
 </div> 

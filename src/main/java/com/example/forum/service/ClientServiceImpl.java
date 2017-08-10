@@ -84,7 +84,7 @@ public class ClientServiceImpl implements ClientService{
 			shift = -shift;
 		}
 	
-		System.out.println("IN FUNCTION @@@@@@@@@@@@@@@@@@@ start:"+presentStart+" | topicId:" + Long.valueOf(category)
+		System.out.println("IN FUNCTION @@@@@@@@@@@@@@@@@@@ start:"+presentStart
 		+" | choose:" + choose + " | quantity:" + quantityOfRecords +" | shift:" +shift+" | cat:"+category );
 		
 		presentStart += shift;
@@ -100,6 +100,19 @@ public class ClientServiceImpl implements ClientService{
 	@Override
 	public int getQuantityOfMessagesFromTopic(Long topicId) {
 		return clientRepository.getQuantityOfMessagesFromTopic(topicId);
+	}
+
+	@Override
+	public int giveNumberOfStartingPostAfterAddCommment(Long topicId, int limit) {
+		int sizeOfTopic = clientRepository.getQuantityOfMessagesFromTopic(topicId);
+		int numberOfPost;
+		if(sizeOfTopic % limit != 0){
+			numberOfPost = (sizeOfTopic/limit)*limit;
+		}
+		else{
+			numberOfPost = ((sizeOfTopic/limit)*limit) - limit;
+		}
+		return numberOfPost;
 	}
 
 }

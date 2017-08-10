@@ -7,9 +7,19 @@
 </head>
 <body>
 	
+	<div class="jumbotron">
+		<div class="container">	
+			 <div th:replace="fragments/header :: header"/>
+		
+			<a th:href="@{/userData}"> Add new topic |</a>
+			<a th:href="@{/topics}">| Show topics </a>
+			<a th:href="@{/main}">| Main </a>
+		</div>
+	</div>
+	
 	<h3>Add a new topic</h3>
 	<section class="container">
-		<form method="POST" class="form-horizontal">
+		<form action="#" th:action="@{/addTopic}" method="POST" class="form-horizontal">
 			<fieldset>
 				<div class="form-group">
 					

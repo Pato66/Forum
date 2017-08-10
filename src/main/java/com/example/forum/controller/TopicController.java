@@ -32,60 +32,66 @@ public class TopicController {
 	@Autowired
 	MessageRepository messageRepository;
 	
+	private int limit = 5;
+	
 	
 	@RequestMapping(value="/addTopic", method=RequestMethod.GET)
 	public String readersBooks(Model model) {
 		model.addAttribute("newTopic", new Topic());
+		model.addAttribute("author", clientService.getUsername());
 		return "addTopic";
 	}
-	
+	//-----------------------------------------------------------------------------------
 	@RequestMapping(value="/topics", method=RequestMethod.GET)
 	public String showTopisc(Model model) {
 		model.addAttribute("start",0);
-		model.addAttribute("topics", clientService.showTopic("all", 3, 0) );
+		model.addAttribute("topics", clientService.showTopic("all",limit, 0) );
 		model.addAttribute("author", clientService.getUsername());
 		return "topics";
 	}
-	
+	//------------------------------------------------------------------------------------
 	@RequestMapping(value="/topics", method=RequestMethod.POST)
 	public String showTopiscPOST(Model model, int start, String direction ) {
-		int limit=3;
 		start = clientService.getNextStartValueToShow(start, limit, direction, "all", "topic");
 		model.addAttribute("start", start);
 		model.addAttribute("topics", clientService.showTopic("all", limit, Integer.valueOf(start) ));
 		model.addAttribute("author", clientService.getUsername());
 		return "topics";
 	}
-	
+	//-------------------------------------------------------------------------------------
 	@RequestMapping(value="/addTopic", method=RequestMethod.POST)
-	public String addToReadingList( Topic newTopic) {
+	public String addToReadingList( Topic newTopic, Model model, String direction) {
 		newTopic.setDateOfCreation(new Date());
 		User user = new User();
 		user.setUserId(2);
 		newTopic.setUser(user);
 		topicRepository.save(newTopic);
-		return "redirect:/addTopic";
+		int start = 0;
+		model.addAttribute("start", start);
+		model.addAttribute("topics", clientService.showTopic("all", limit, Integer.valueOf(start) ));
+		model.addAttribute("author", clientService.getUsername());
+		
+		return "topics";
 	}
-	
+	//----------------------------------------------------------------------------------------
 	@RequestMapping(value="/topic", method=RequestMethod.POST)
 	public String showTopicDetails(Model model, String  topicId, String description) {
 		String username  = clientService.getUsername();
 		model.addAttribute("start",0);
-		model.addAttribute("messages", clientService.findAllByMessagesTopicId(Long.valueOf(topicId), 5, 0 ) );
+		model.addAttribute("messages", clientService.findAllByMessagesTopicId(Long.valueOf(topicId), limit, 0 ) );
 		model.addAttribute("description", description);
 		model.addAttribute("topicId", topicId);
 		model.addAttribute("author", username);
 		model.addAttribute("authorId",clientService.findByUsername(username).getUserId());
 		return "topic";
 	}
-	
+	//----------------------------------------------------------------------------------------------
 	@RequestMapping(value="/topicChangePage", method=RequestMethod.POST)
 	public String showTopicDetailsChangePage(Model model, String  topicId, 
 			String description, int start, String direction) {
 		
 		String username  = clientService.getUsername();
 		Long authorId = clientService.findByUsername(username).getUserId();
-		int limit=5;
 		start = clientService.getNextStartValueToShow(start, limit, direction, String.valueOf(topicId) , "message");
 		model.addAttribute("start", start);
 		
@@ -98,7 +104,7 @@ public class TopicController {
 		model.addAttribute("authorId", authorId);
 		return "topic";
 	}
-	
+	//----------------------------------------------------------------------------------------------------
 	@RequestMapping(value="/topicAddMessage", method=RequestMethod.POST)
 	public String addMessage(Model model, Message message, String  topicId, String description) {
 		message.setDateOfPublish(new Date());
@@ -106,12 +112,13 @@ public class TopicController {
 		message.setThumbsUp(0);
 		messageRepository.save(message);
 		String username  = clientService.getUsername();
-		model.addAttribute("messages", clientService.findAllByMessagesTopicId(Long.valueOf(topicId), 0, 0 ));
+		
+		model.addAttribute("start", clientService.giveNumberOfStartingPostAfterAddCommment(Long.valueOf(topicId), limit));
+		model.addAttribute("messages", clientService.findAllByMessagesTopicId(Long.valueOf(topicId), 5, 0 ) );
 		model.addAttribute("description", description);
 		model.addAttribute("topicId", topicId);
 		model.addAttribute("author", username);
 		model.addAttribute("authorId",clientService.findByUsername(username).getUserId());
-		//------------
 		return "topic";
 	}
 	
