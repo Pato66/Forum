@@ -1,0 +1,51 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <div th:replace="fragments/header :: header-css"/>
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css"></link>
+</head>
+<body>
+
+
+<div class="container">
+
+    <div class="starter-template">
+        <h1>Users</h1>
+
+        <h1 th:inline="text">Hello [[${#httpServletRequest.remoteUser}]]!</h1>
+        <form th:action="@{/logout}" method="post">
+            <input type="submit" class="btn btn-primary" value="Sign Out"/>
+        </form>
+    </div>
+
+</div>
+
+	<h2>All users</h2>
+		<div th:unless="${#lists.isEmpty(users)}">
+			<dl th:each="user : ${users}">			
+				
+				<div class="thumbnail">
+				<div class="caption">
+					<dt class="bookHeadline">
+					
+					Login: <span th:text="${user.login}"></span>
+					</dt>
+					
+					<dd class="bookDescription">
+						 First name:<span th:text="${user.lastName}" ></span>
+						 Last name:<span th:text="${user.firstName}" ></span>
+						 City:<span th:text="${user.city}" ></span>
+						 Email:<span th:text="${user.email}" ></span>
+						 Enabled:<span th:text="${user.enabled}" ></span>			
+					</dd>							
+				</div>
+				</div>
+				
+			</dl>
+		</div>
+		<div th:if="${#lists.isEmpty(users)}">
+			<p>Users content is not available now.</p>
+		</div>
+
+</body>
+</html>
