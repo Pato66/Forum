@@ -1,7 +1,9 @@
 package com.example.forum.config;
 
 
-import org.springframework.security.web.access.AccessDeniedHandler; 
+import org.springframework.security.web.access.AccessDeniedHandler;
+import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
 import javax.sql.DataSource;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,4 +41,21 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
     				.usersByUsernameQuery("select login,password, enabled from users where login=?")
     				.authoritiesByUsernameQuery("select login, role from user_roles where login=?");      
     }
+    
+    public void addResourceHandlers(ResourceHandlerRegistry registry) {
+        registry
+          .addResourceHandler("/resources/**")
+          .addResourceLocations("/resources/","classpath:/other-resources/");
+    }
+    
+    @Configuration
+    public class StaticResourceConfiguration extends WebMvcConfigurerAdapter {      
+        @Override
+        public void addResourceHandlers(ResourceHandlerRegistry registry) {
+            registry.addResourceHandler("/resources/**")
+            .addResourceLocations("src/main/")
+            .setCachePeriod(0);
+        }
+    }
+    
 }

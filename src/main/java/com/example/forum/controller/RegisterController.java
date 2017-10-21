@@ -42,20 +42,22 @@ public class RegisterController {
 	public String registarationPOST(Model model,@Valid User user, BindingResult bindingResult){
 		user.setEnabled(true);
 		if (bindingResult.hasErrors()) {
-			if(!clientService.registerNewUser(user)){
+			/*if(!clientService.registerNewUser(user)){
 				bindingResult.rejectValue("login", "login", "This login is already taken");
-			}
-		    return "registration";
+			} */
+		
+		    return "registration"; 
+		
 		} 
 		
 		if(clientService.registerNewUser(user)){
 			
 			userRolesRepository.save(new UserRoles(user.getLogin(),"ROLE_USER"));
-			return "redirect:/main";
+			return "redirect:/login";
 		}
 		else{
 			bindingResult.rejectValue("login", "login", "This login is already taken");
-			return "redirect:/registration";
-		}
+			return "registration";
+		} 
 	}
 }
