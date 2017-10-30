@@ -42,11 +42,6 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
     				.authoritiesByUsernameQuery("select login, role from user_roles where login=?");      
     }
     
-    public void addResourceHandlers(ResourceHandlerRegistry registry) {
-        registry
-          .addResourceHandler("/resources/**")
-          .addResourceLocations("/resources/","classpath:/other-resources/");
-    }
     
     @Configuration
     public class StaticResourceConfiguration extends WebMvcConfigurerAdapter {      

@@ -3,6 +3,7 @@
 	<head>
 		<title>Topic</title>
 		<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css"></link>
+		<style> body {background-color: #ccf5ff;} </style>
 	</head>
 	<body>	
 	
@@ -26,12 +27,12 @@
 					<div class="caption">
 						<dt class="bookHeadline">
 							
-						Thumbs up: <span th:text="${message.thumbsUp}"></span>
-						Thumbs down: <span th:text="${message.thumbsDown}"></span>				
-						Date: <span th:text="${message.dateOfPublish}"></span>
+						Thumbs up: <span th:text="${message.thumbsUp}"></span> <br/>
+						Thumbs down: <span th:text="${message.thumbsDown}"></span>	<br/>			
+						Date: <span th:text="${message.dateOfPublish}"></span> <br/> <br/>
 						
 						<dd class="bookDescription">
-							Category: <span  style="display:block;" th:text="${message.contents}"></span>
+							<span  style="display:block;" th:text="${message.contents}"></span>
 						</dd>
 						
 						</dt>								
@@ -44,10 +45,11 @@
 			<p>Content is empty now.</p>
 		</div>
 		
+		<section class="container">
 		<!-- next page -->
 		<form method="POST" action="#" th:action="@{/topicChangePage}">
 			<label for="login"></label>
-				<input type="text" id="start" name="start" th:value="*{start}" />
+				<input type="hidden" id="start" name="start" th:value="*{start}" />
 				<input type="hidden" id="direction" name="direction" th:value="forward" />
 				
 				<input type="hidden" id="topicId" name="topic" th:value="*{topicId}" />
@@ -55,8 +57,9 @@
 				<input type="hidden" id="topicId"  name="topicId" th:value="*{topicId}"></input>
 				<input type="hidden" id="description" name="description" th:value="*{description}" />			
 				
-				<input type="submit" value="Next page" class="btn btn-primary"></input>
+				<input style="width:120px" type="submit" value="  Next page " class="btn btn-primary"></input>
 		</form>	 
+		<br/>
 		
 		<!-- previous page -->
 		<form method="POST" action="#" th:action="@{/topicChangePage}">
@@ -70,9 +73,12 @@
 				<input type="hidden" id="description" name="description" th:value="*{description}" />
 								
 				
-				<input type="submit" value="Previous page" class="btn btn-primary"></input>
+				<input style="width:120px" type="submit" value="Previev page" class="btn btn-primary"></input>
 		</form>	 
 		
+		</section>
+		
+		<br/><br/>
 		<!-- add comment -->
 		<form method="POST" action="#" th:action="@{/topicAddMessage}" >
 			<label for="login">:</label>

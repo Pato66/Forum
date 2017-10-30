@@ -18,6 +18,7 @@ import com.example.forum.model.Topic;
 import com.example.forum.model.User;
 import com.example.forum.repository.MessageRepository;
 import com.example.forum.repository.TopicRepository;
+import com.example.forum.repository.UserRepository;
 import com.example.forum.service.ClientService;
 
 @Controller
@@ -31,6 +32,9 @@ public class TopicController {
 	
 	@Autowired
 	MessageRepository messageRepository;
+	
+	@Autowired
+	UserRepository userRepository;
 	
 	private int limit = 5;
 	
@@ -83,6 +87,9 @@ public class TopicController {
 		model.addAttribute("topicId", topicId);
 		model.addAttribute("author", username);
 		model.addAttribute("authorId",clientService.findByUsername(username).getUserId());
+		
+		model.addAttribute("users", userRepository.findAll());
+		
 		return "topic";
 	}
 	//----------------------------------------------------------------------------------------------

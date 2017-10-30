@@ -3,6 +3,7 @@
 <head>
     <div th:replace="fragments/header :: header-css"/>
     <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css"></link>
+    <style> body {background-color: #ccf5ff;} </style>
 </head>
 <body>
 
@@ -14,14 +15,11 @@
         <h1>Admin page (Spring Security protected)</h1>
 
         <h1 th:inline="text">Hello [[${#httpServletRequest.remoteUser}]]!</h1>
-        <form th:action="@{/logout}" method="post">
-            <input type="submit" value="Sign Out"/>
-        </form>
 
 		<div class="jumbotron">
 		<div class="container">	
 		
-			<a th:href="@{/users}">| Main </a>
+			<a th:href="@{/users}">| Show all users </a>
 			
 		</div>
 	</div>
@@ -30,8 +28,6 @@
 
 </div>
 <!-- /.container -->
-
-<div th:replace="fragments/footer :: footer"/>
 
 </body>
 </html>
