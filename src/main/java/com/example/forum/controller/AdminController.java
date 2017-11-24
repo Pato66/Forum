@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.example.forum.model.User;
+import com.example.forum.repository.ClientRepository;
 import com.example.forum.repository.UserRepository;
 
 @Controller
@@ -14,6 +15,9 @@ public class AdminController {
 	
 	@Autowired
 	UserRepository userRepository;
+	
+	@Autowired
+	ClientRepository clientRepository;
 	
 	@RequestMapping(value="admin", method=RequestMethod.GET)
 	public String registaration(Model model){
@@ -29,6 +33,12 @@ public class AdminController {
 	public String showUsers(Model model){
 		model.addAttribute("users", userRepository.findAll());
 		return "users";
+	}
+	
+	@RequestMapping(value="statistics", method=RequestMethod.GET)
+	public String showStatistics(Model model){
+		model.addAttribute("users", clientRepository.getUsersStatistics());
+		return "statistics";
 	}
 	
 }

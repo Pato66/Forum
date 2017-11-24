@@ -1,6 +1,8 @@
 package com.example.forum.service;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
@@ -10,6 +12,7 @@ import org.springframework.stereotype.Service;
 import com.example.forum.model.Message;
 import com.example.forum.model.Topic;
 import com.example.forum.model.User;
+import com.example.forum.model.UserStat;
 import com.example.forum.repository.ClientRepository;
 import com.example.forum.repository.UserRepository;
 
@@ -114,5 +117,13 @@ public class ClientServiceImpl implements ClientService{
 		}
 		return numberOfPost;
 	}
+
+	@Override
+	public List<UserStat> getUsersStatistics() {
+		return clientRepository.getUsersStatistics();
+	}
+
+
+
 
 }

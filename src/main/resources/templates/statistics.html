@@ -24,12 +24,12 @@
 		<div class="container">	
 		
 			<a th:href="@{/admin}">| Admin </a>
-			<a th:href="@{/statistics}">| Statistics |</a>
+			<a th:href="@{/users}">| Users |</a>
 			
 		</div>
 	</div>
 
-	<h3>All users</h3>
+	<h3>Statistics</h3>
 		<div th:unless="${#lists.isEmpty(users)}">
 			<dl th:each="user : ${users}">			
 				
@@ -41,11 +41,7 @@
 					</dt>
 					
 					<dd class="bookDescription">
-						 First name:<span th:text="${user.lastName}" ></span>
-						 Last name:<span th:text="${user.firstName}" ></span>
-						 City:<span th:text="${user.city}" ></span>
-						 Email:<span th:text="${user.email}" ></span>
-						 Enabled:<span th:text="${user.enabled}" ></span>			
+						 Posts:<span th:text="${user.posts}" ></span>			
 					</dd>							
 				</div>
 				</div>

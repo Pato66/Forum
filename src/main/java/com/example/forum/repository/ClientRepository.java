@@ -5,6 +5,7 @@ import java.util.List;
 import com.example.forum.model.Message;
 import com.example.forum.model.Topic;
 import com.example.forum.model.User;
+import com.example.forum.model.UserStat;
 
 
 public interface ClientRepository {
@@ -19,10 +20,15 @@ public interface ClientRepository {
 	
 	List<User> getUser(int id);
 	
+	List<User> getUsers(List<Integer> identifiers);
+	
 	boolean ifUserExistInDatabase(String login);
 	
 	boolean checkUserInDatabase(User user);
 	
 	User findByUsername(String username);
+
+	List<UserStat> getUsersStatistics();
+	
 	
 }

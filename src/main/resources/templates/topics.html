@@ -25,6 +25,11 @@
 				<div class="caption">
 					<dt class="bookHeadline">
 					
+					<dd class="bookDescription">
+						User <span th:if="${topic.user.login}" th:text="${topic.user.login}" ></span>
+					
+					</dd>
+					
 					Category: <span th:text="${topic.category}"></span>
 					</dt>
 					

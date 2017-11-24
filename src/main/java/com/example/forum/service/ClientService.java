@@ -3,6 +3,7 @@ package com.example.forum.service;
 import java.util.List;
 
 import com.example.forum.model.Message;
+import com.example.forum.model.UserStat;
 import com.example.forum.model.Topic;
 import com.example.forum.model.User;
 
@@ -27,5 +28,7 @@ public interface ClientService {
 	int getNextStartValueToShow(int presentStart, int shift, String direction, String category, String choose);
 	
 	int giveNumberOfStartingPostAfterAddCommment(Long topicId, int limit);
+
+	List<UserStat> getUsersStatistics();
 	
 }

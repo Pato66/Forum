@@ -11,9 +11,8 @@
 <div class="container">
 
     <div class="starter-template">
-        <h1>Users</h1>
 
-        <h1 th:inline="text">Hello [[${#httpServletRequest.remoteUser}]]!</h1>
+        <h3 th:inline="text">[[${#httpServletRequest.remoteUser}]]</h3>
         <form th:action="@{/logout}" method="post">
             <input type="submit" class="btn btn-primary" value="Sign Out"/>
         </form>
@@ -21,7 +20,16 @@
 
 </div>
 
-	<h2>All users</h2>
+	<div class="jumbotron">
+		<div class="container">	
+		
+			<a th:href="@{/admin}">| Admin </a>
+			<a th:href="@{/statistics}">| Statistics |</a>
+			
+		</div>
+	</div>
+
+	<h3>All users</h3>
 		<div th:unless="${#lists.isEmpty(users)}">
 			<dl th:each="user : ${users}">			
 				

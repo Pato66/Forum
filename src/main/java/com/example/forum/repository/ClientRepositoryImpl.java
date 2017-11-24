@@ -1,7 +1,7 @@
 package com.example.forum.repository;
 
 import java.util.List;
-
+import java.util.TreeMap;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -13,6 +13,7 @@ import org.springframework.stereotype.Repository;
 import com.example.forum.model.Message;
 import com.example.forum.model.Topic;
 import com.example.forum.model.User;
+import com.example.forum.model.UserStat;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -106,6 +107,29 @@ public class ClientRepositoryImpl implements ClientRepository {
 		return q.getResultList().size();
 	}
 
+	@Override
+	public List<User> getUsers(List<Integer> identifiers) {
+		
+		StringBuilder sb= new StringBuilder();
+		String filter = "";
+		for(int i=0; i<identifiers.size(); i++){  
+			sb.append( "'" + identifiers.get(i) +"'," );
+		}
 
+		filter = sb.toString();
+		filter = filter.substring(0, filter.length()-1);
+		
+		String query= "select u from User u where id IN("+filter+")";
+		TypedQuery<User> q = entityManager.createQuery(query, User.class);
+        return q.getResultList();
+	}
+
+	@Override
+	public List<UserStat> getUsersStatistics() {
+		String query= "select NEW com.example.forum.model.UserStat(m.user.login, count(m.user.login)) from Message m group by m.user.login order by 2 desc";
+		TypedQuery<UserStat> q = entityManager.createQuery(query, UserStat.class);
+		System.out.println("@@@@@@@@@@@@@@@@@@@@@@@@@ SIZE:"+q.getResultList().size());
+		return q.getResultList();
+	}
 
 }
