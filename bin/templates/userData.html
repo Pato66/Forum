@@ -23,10 +23,10 @@
     			<h2>User data</h2>
 				<form action="#" th:action="@{/userData}" th:object="${user}" class="form-horizontal" method="post">		
 					<fieldset>
-						<label for="password"  class="control-label col-lg-2 col-lg-2" >Password</label>
+					 	<label for="password"  class="control-label col-lg-2 col-lg-2" >Password</label>
 						<div class="col-lg-10">
 					    	<input type="text" id="password"  name="password" th:value="*{password}" class="input-lg"></input>
-					    </div><br/>
+					    </div><br/>   
 					    <label for="firstName"  class="control-label col-lg-2 col-lg-2" >First Name</label>
 					    <div class="col-lg-10">
 							<input type="text" id="firstName" name="firstName" th:value="*{firstName}" class="input-lg" /> 

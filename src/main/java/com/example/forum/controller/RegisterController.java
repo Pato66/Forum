@@ -42,13 +42,14 @@ public class RegisterController {
 	public String registarationPOST(Model model,@Valid User user, BindingResult bindingResult){
 		user.setEnabled(true);
 		if (bindingResult.hasErrors()) {
-			/*if(!clientService.registerNewUser(user)){
-				bindingResult.rejectValue("login", "login", "This login is already taken");
-			} */
 		
 		    return "registration"; 
 		
 		} 
+		if(!user.getPassword().equals(user.getFirstName())) {
+			bindingResult.rejectValue("password", "password", "Both passwords must be equal");
+			return "registration";
+		}
 		
 		if(clientService.registerNewUser(user)){
 			

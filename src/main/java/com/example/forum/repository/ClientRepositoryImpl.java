@@ -41,14 +41,12 @@ public class ClientRepositoryImpl implements ClientRepository {
 		TypedQuery<User> q = entityManager.createQuery(query, User.class);
         return q.getResultList();
 	}
+	
 
 	@Override
-	public boolean ifUserExistInDatabase(String login) {
-		String query= "select u from User u WHERE login='" + login + "'";
+	public boolean checkUserInDatabase(User user) {
+		String query= "select u from User u WHERE login='" + user.getLogin() + "' and password='" + user.getPassword() + "'";
 		TypedQuery<User> q = entityManager.createQuery(query, User.class);
-		logger.info("-------------------------------------------------------------------------------------");
-		logger.info("Query returned:" + q.getFirstResult()+" | size" + q.getResultList().size() );
-		logger.info("------------------------------------------------------------------------------------");
 		if(q.getResultList().size() != 0){
 			return true;
 		}
@@ -56,11 +54,14 @@ public class ClientRepositoryImpl implements ClientRepository {
 			return false;
 		}
 	}
-
+	//...
 	@Override
-	public boolean checkUserInDatabase(User user) {
-		String query= "select u from User u WHERE login='" + user.getLogin() + "' and password='" + user.getPassword() + "'";
+	public boolean ifUserExistInDatabase(String login) {
+		String query= "select u from User u WHERE login='" + login + "'";
 		TypedQuery<User> q = entityManager.createQuery(query, User.class);
+		logger.info("-------------------------------------------------------------------------------------");
+		logger.info("Query returned:" + q.getFirstResult()+" | size" + q.getResultList().size() );
+		logger.info("------------------------------------------------------------------------------------");
 		if(q.getResultList().size() != 0){
 			return true;
 		}

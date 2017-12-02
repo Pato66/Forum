@@ -17,13 +17,13 @@ public class LoginController {
 	ClientService clientService;
 
 	@RequestMapping(value="login", method=RequestMethod.GET)
-	public String registaration(Model model){
+	public String login(Model model){
 		model.addAttribute("newUser", new User());
 		return "login";
 	}
 	
 	@RequestMapping(value="login", method=RequestMethod.POST)
-	public String registarationPOST(Model model, User newUser){
+	public String loginPOST(Model model, User newUser){
 		   return "main";
 	}
 }

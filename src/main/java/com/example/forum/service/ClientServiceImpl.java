@@ -7,6 +7,7 @@ import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.example.forum.model.Message;
@@ -24,7 +25,10 @@ public class ClientServiceImpl implements ClientService{
 
 	@Autowired
 	ClientRepository clientRepository;
-
+	
+	@Autowired
+	private PasswordEncoder passwordEncoder;
+	
 	@Override
 	public List<Topic> showTopic(String category, int limit, int start) {
 		return clientRepository.showTopics(category, limit, start);
@@ -49,7 +53,7 @@ public class ClientServiceImpl implements ClientService{
 			return true;
 		}
 	}
-
+	//...
 	@Override
 	public boolean checkUserInDatabase(User user) {
 		return clientRepository.checkUserInDatabase(user);

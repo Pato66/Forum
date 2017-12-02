@@ -27,11 +27,11 @@ public class User  implements java.io.Serializable {
      private boolean enabled; 
 
 	 @NotEmpty(message = "Please enter your login.")
-     @Size(min=3, max=30, message = "Length of login should be between 3 and 30 characters.")
+     @Size(min=4, max=30, message = "Length of login should be between 4 and 30 characters.")
      private String login;
      
      @NotEmpty(message = "Please enter your password.")
-     @Size(min=3, max=30, message = "Length of password should be between 3 and 30 characters.")
+     @Size(min=5, message = "Length of password should have at least 5 characters.")
      private String password;
 
      
