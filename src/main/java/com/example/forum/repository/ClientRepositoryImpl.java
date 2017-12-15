@@ -29,10 +29,15 @@ public class ClientRepositoryImpl implements ClientRepository {
 	
 	@Override
 	public List<Topic> showTopics(String category, int limit, int start) {
-		String query= "select t from Topic t order by dateOfCreation desc";
+		String query;
+		if(category.equals("XXXXX")) {
+			query= "select t from Topic t order by dateOfCreation desc";
+		}
+		else {
+			query= "select t from Topic t where description like '%" + category + "%' order by dateOfCreation desc";
+		}
 		TypedQuery<Topic> q = entityManager.createQuery(query, Topic.class).setFirstResult(start).setMaxResults(limit);
-        return q.getResultList();
-		
+        return q.getResultList();	
 	}
 
 	@Override
@@ -89,8 +94,8 @@ public class ClientRepositoryImpl implements ClientRepository {
 	}
 
 	@Override
-	public int getTopiscForCateroryQuantuty(String category) {
-		String query= "select t from Topic t";// WHERE category='" + category + "'";
+	public int getTopiscForCateroryQuantuty(String description) {
+		String query= "select t from Topic t WHERE description like'%" + description + "%'";
 		TypedQuery<Topic> q = entityManager.createQuery(query, Topic.class);
 		/*logger.info("-------------------------------------------------------------------------------------");
 		logger.info("TOPIC TABLE : Size: " + q.getResultList().size() );
@@ -129,7 +134,6 @@ public class ClientRepositoryImpl implements ClientRepository {
 	public List<UserStat> getUsersStatistics() {
 		String query= "select NEW com.example.forum.model.UserStat(m.user.login, count(m.user.login)) from Message m group by m.user.login order by 2 desc";
 		TypedQuery<UserStat> q = entityManager.createQuery(query, UserStat.class);
-		System.out.println("@@@@@@@@@@@@@@@@@@@@@@@@@ SIZE:"+q.getResultList().size());
 		return q.getResultList();
 	}
 

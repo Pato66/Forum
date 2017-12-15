@@ -38,7 +38,6 @@ public class TopicController {
 	
 	private int limit = 5;
 	
-	
 	@RequestMapping(value="/addTopic", method=RequestMethod.GET)
 	public String readersBooks(Model model) {
 		model.addAttribute("newTopic", new Topic());
@@ -48,17 +47,29 @@ public class TopicController {
 	//-----------------------------------------------------------------------------------
 	@RequestMapping(value="/topics", method=RequestMethod.GET)
 	public String showTopisc(Model model) {
+		model.addAttribute("phrase","");
 		model.addAttribute("start",0);
-		model.addAttribute("topics", clientService.showTopic("all",limit, 0) );
+		model.addAttribute("topics", clientService.showTopic("",limit, 0) );
 		model.addAttribute("author", clientService.getUsername());
 		return "topics";
 	}
 	//------------------------------------------------------------------------------------
 	@RequestMapping(value="/topics", method=RequestMethod.POST)
-	public String showTopiscPOST(Model model, int start, String direction ) {
-		start = clientService.getNextStartValueToShow(start, limit, direction, "all", "topic");
+	public String showTopiscPOST(Model model, int start, String direction, String phrase ) {
+		
+		start = clientService.getNextStartValueToShow(start, limit, direction, phrase, "topic");
+		model.addAttribute("phrase",phrase);
 		model.addAttribute("start", start);
-		model.addAttribute("topics", clientService.showTopic("all", limit, Integer.valueOf(start) ));
+		model.addAttribute("topics", clientService.showTopic(phrase, limit, Integer.valueOf(start) ));
+		model.addAttribute("author", clientService.getUsername());
+		return "topics";
+	}
+	//------------------------------------------------------------------------------------
+	@RequestMapping(value="/topicsSearch", method=RequestMethod.POST)
+	public String showTopiscPOSTSearch(Model model, int start, String direction, String phrase ) {
+		model.addAttribute("phrase",phrase);
+		model.addAttribute("start", 0);
+		model.addAttribute("topics", clientService.showTopic(phrase, limit, Integer.valueOf(start) ));
 		model.addAttribute("author", clientService.getUsername());
 		return "topics";
 	}
@@ -67,7 +78,8 @@ public class TopicController {
 	public String addToReadingList( Topic newTopic, Model model, String direction) {
 		newTopic.setDateOfCreation(new Date());
 		User user = new User();
-		user.setUserId(2);
+		String username  = clientService.getUsername();
+		user.setUserId(clientService.findByUsername(username).getUserId());
 		newTopic.setUser(user);
 		topicRepository.save(newTopic);
 		int start = 0;
@@ -75,7 +87,7 @@ public class TopicController {
 		model.addAttribute("topics", clientService.showTopic("all", limit, Integer.valueOf(start) ));
 		model.addAttribute("author", clientService.getUsername());
 		
-		return "topics";
+		return "main";
 	}
 	//----------------------------------------------------------------------------------------
 	@RequestMapping(value="/topic", method=RequestMethod.POST)

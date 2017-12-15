@@ -54,7 +54,7 @@ public class RegisterController {
 		if(clientService.registerNewUser(user)){
 			
 			userRolesRepository.save(new UserRoles(user.getLogin(),"ROLE_USER"));
-			return "redirect:/login";
+			return "redirect:/main";
 		}
 		else{
 			bindingResult.rejectValue("login", "login", "This login is already taken");

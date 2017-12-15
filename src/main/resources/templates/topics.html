@@ -16,7 +16,16 @@
 			</div>
 		</div>
 		
+		<div  class="container" > 
 		<h2>All topics</h2>
+		
+		<form method="POST" action="#" th:action="@{/topicsSearch}">	
+				Searching phrase: <input type="text" id="phrase" name="phrase"  th:value="*{phrase}" />
+				<input type="hidden" id="start" name="start" th:value="0" />
+				<input type="hidden" id="direction" name="direction" th:value="forward" />
+				<input style="width:120px" type="submit" value="Search" class="btn btn-primary"></input>
+		</form>
+		
 		<div th:unless="${#lists.isEmpty(topics)}">
 			<dl th:each="topic : ${topics}">
 				<form action="#" th:action="@{/topic}" th:object="${topic}" method="post">
@@ -66,6 +75,7 @@
 			<label for="login"></label>
 				<input type="hidden" id="start" name="start" th:value="*{start}" />
 				<input type="hidden" id="direction" name="direction" th:value="forward" />
+				<input type="hidden" id="phrase" name="phrase" th:value="*{phrase}" />
 				<input style="width:120px" type="submit" value="  Next page  " class="btn btn-primary"></input>
 		</form>	 
 		<br/>
@@ -74,10 +84,14 @@
 			<label for="login"></label>
 				<input type="hidden" id="start" name="start" th:value="*{start}" />
 				<input type="hidden" id="direction" name="direction" th:value="back" />
+				<input type="hidden" id="phrase" name="phrase" th:value="*{phrase}" />
 				<input style="width:120px" type="submit" value="Previous page" class="btn btn-primary"></input>
 		</form>	 
 		
 		</section>
+		<br/>
+	 	<br/>
 		
+	</div>
 	</body>
 </html>
